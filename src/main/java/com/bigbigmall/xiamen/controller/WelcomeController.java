@@ -28,6 +28,8 @@ import org.w3c.dom.Text;
 @Controller
 @RequestMapping("/")
 public class WelcomeController {
+        
+        
 
         /**
          * https://redan-api.herokuapp.com/story/
@@ -49,7 +51,7 @@ public class WelcomeController {
          */
         @RequestMapping("/")
         @ResponseBody
-        void get(HttpServletResponse response) throws Exception {
+        void getStory(HttpServletResponse response) throws Exception {
                 //创建文档对象
                 DocumentBuilderFactory newInstance = DocumentBuilderFactory.newInstance();
                 DocumentBuilder newDocumentBuilder = newInstance.newDocumentBuilder();
