@@ -63,6 +63,9 @@ public class WelcomeController {
 
                 //添加根节点
                 Element documentElement = doc.createElement("document");
+                
+                
+                
                 doc.appendChild(documentElement);
 
                 //获取请求体
