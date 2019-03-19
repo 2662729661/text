@@ -1,6 +1,5 @@
 package com.bigbigmall.xiamen.controller;
 
-import java.util.Iterator;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -28,28 +27,33 @@ import org.w3c.dom.Text;
 @Controller
 @RequestMapping("/")
 public class WelcomeController {
-        
-        
+
+        /**
+         * https://redan-api.herokuapp.com/profile/personnels
+         *
+         * @param response
+         * @throws Exception
+         */
+        @RequestMapping("/")
+        @ResponseBody
+        void get(HttpServletResponse response) throws Exception {
+                //获取文档对象
+                DocumentBuilderFactory newInstance = DocumentBuilderFactory.newInstance();
+                DocumentBuilder newDocumentBuilder = newInstance.newDocumentBuilder();
+                Document doc = newDocumentBuilder.newDocument();
+
+                //创建根节点
+                Element documentElement = doc.createElement("document");
+                doc.appendChild(documentElement);
+        }
 
         /**
          * https://redan-api.herokuapp.com/story/
          *
          * @param response
          * @throws Exception
-         *
-         * {
-         * "result": [ { "comments": [ { "id":
-         * "090f6c35-284f-4de7-91bf-8c3a1cd140a6", "content": "這是一篇好文章阿", "who":
-         * { "nickname": "pc", "id": "6abb7ef8-b336-4786-8efa-c9d7511cb669" } },
-         * { "id": "311a8fae-8be3-4317-9300-c8ad15cb3f12", "content":
-         * "家惠什麼時候要開始減肥呀", "who": { "nickname": "pc", "id":
-         * "6abb7ef8-b336-4786-8efa-c9d7511cb669" } } ], "emotions": 0,
-         * "postedAt": "2014-02-11T00:00:00+08:00", "author": { "nickname":
-         * "redan", "id": "f24429e8-2b52-45c2-af41-4965eefe155c" }, "id":
-         * "13b16230-eb02-474e-897f-8daf276dd1c7", "content": "this is content
-         * 這是一篇文章" } ], "status": 200 }
          */
-        @RequestMapping("/")
+        @RequestMapping("/story")
         @ResponseBody
         void getStory(HttpServletResponse response) throws Exception {
                 //创建文档对象

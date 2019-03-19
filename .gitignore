@@ -18,6 +18,7 @@
 /nbbuild/
 /nbdist/
 /nbproject/private/
+/.gitignore
 
 ### STS ###
 .apt_generated
