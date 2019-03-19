@@ -84,64 +84,12 @@ public class WelcomeController {
 
 
                         /*--------------------------添加节点comments----------------------------------*/
+                        Element commentsElement = doc.createElement("comments");
+                        documentElement.appendChild(commentsElement);
                         JSONArray commentsArray = resultObject.getJSONArray("comments");
-                        //创建result的Array-comments-1
-                        JSONObject commentsObject1 = commentsArray.getJSONObject(0);
-                        Element commentsElement1 = doc.createElement("comments");
-                        documentElement.appendChild(commentsElement1);
-                        //创建comments的Text-id
-                        Element commentsIdElement = doc.createElement("id");
-                        Text commentsIdTextNode = doc.createTextNode(commentsObject1.get("id").toString());
-                        commentsIdElement.appendChild(commentsIdTextNode);
-                        commentsElement1.appendChild(commentsIdElement);
-                        //创建comments的Text-content
-                        Element commentsContentElement = doc.createElement("content");
-                        Text commentsContentTextNode = doc.createTextNode(commentsObject1.get("content").toString());
-                        commentsContentElement.appendChild(commentsContentTextNode);
-                        commentsElement1.appendChild(commentsContentElement);
-                        //创建comments的Object-who
-                        Element commentsWhoElement = doc.createElement("who");
-                        commentsElement1.appendChild(commentsWhoElement);
-                        JSONObject whoObject = commentsObject1.getJSONObject("who");
-                        //创建who的Text-nickname
-                        Element whoNicknameElement = doc.createElement("nickname");
-                        Text whoNicknameTextNode = doc.createTextNode(whoObject.get("nickname").toString());
-                        whoNicknameElement.appendChild(whoNicknameTextNode);
-                        commentsWhoElement.appendChild(whoNicknameElement);
-                        //创建who的Text-id
-                        Element whoIdElement = doc.createElement("id");
-                        Text whoIdTextNode = doc.createTextNode(whoObject.get("id").toString());
-                        whoIdElement.appendChild(whoIdTextNode);
-                        commentsWhoElement.appendChild(whoIdElement);
-
-                        //创建result的Array-comments-2
-                        JSONObject commentsObject2 = commentsArray.getJSONObject(1);
-                        Element comments2Element = doc.createElement("comments");
-                        documentElement.appendChild(comments2Element);
-                        //创建comments-2的Text-id
-                        Element comments2IdElement = doc.createElement("id");
-                        Text comments2IdTextNode = doc.createTextNode(commentsObject2.get("id").toString());
-                        comments2IdElement.appendChild(comments2IdTextNode);
-                        comments2Element.appendChild(comments2IdElement);
-                        //创建comments的Text-content
-                        Element comments2ContentElement = doc.createElement("content");
-                        Text comments2ContentTextNode = doc.createTextNode(commentsObject2.get("content").toString());
-                        comments2ContentElement.appendChild(comments2ContentTextNode);
-                        comments2Element.appendChild(comments2ContentElement);
-                        //创建comments的Object-who
-                        Element comments2WhoElement = doc.createElement("who");
-                        comments2Element.appendChild(comments2WhoElement);
-                        JSONObject whoObject2 = commentsObject2.getJSONObject("who");
-                        //创建who的Text-nickname
-                        Element who2NicknameElement = doc.createElement("nickname");
-                        Text who2NicknameTextNode = doc.createTextNode(whoObject2.get("nickname").toString());
-                        who2NicknameElement.appendChild(who2NicknameTextNode);
-                        comments2WhoElement.appendChild(who2NicknameElement);
-                        //创建who的Text-id
-                        Element who2IdElement = doc.createElement("id");
-                        Text who2IdTextNode = doc.createTextNode(whoObject2.get("id").toString());
-                        who2IdElement.appendChild(who2IdTextNode);
-                        comments2WhoElement.appendChild(who2IdElement);
+                        for (int i = 0; i < commentsArray.length(); i++) {
+                                JSONObject jsonObject = commentsArray.getJSONObject(i);
+                        }
 
 
                         /*--------------------------添加节点emotions----------------------------------*/

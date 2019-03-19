@@ -11,7 +11,6 @@
 
 ### NetBeans ###
 /.nb-gradle/
-/.gitignore/
 /build/
 /dist/
 /nb-configuration.xml
