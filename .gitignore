@@ -18,7 +18,7 @@
 /nbbuild/
 /nbdist/
 /nbproject/private/
-
+/.gitignore
 
 ### STS ###
 .apt_generated
@@ -28,4 +28,3 @@
 .settings
 .springBeans
 .sts4-cache
-.gitignore
