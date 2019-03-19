@@ -81,13 +81,15 @@ public class WelcomeController {
                         //获取result值Object
                         JSONArray resultArray = new JSONObject(all).getJSONArray("result");
                         JSONObject resultObject = resultArray.getJSONObject(0);
-                        Element resultElement = doc.createElement("result");
-                        documentElement.appendChild(resultElement);
+                        Element storiesElement = doc.createElement("stories");
+                        documentElement.appendChild(storiesElement);
+                        Element storyElement = doc.createElement("story");
+                        storiesElement.appendChild(storyElement);
 
 
                         /*--------------------------添加节点comments----------------------------------*/
                         Element commentsElement = doc.createElement("comments");
-                        resultElement.appendChild(commentsElement);
+                        storyElement.appendChild(commentsElement);
                         JSONArray commentsArray = resultObject.getJSONArray("comments");
                         for (int i = 0; i < commentsArray.length(); i++) {
                                 JSONObject commentObject = commentsArray.getJSONObject(i);
@@ -113,17 +115,17 @@ public class WelcomeController {
 
                         /*--------------------------添加节点result----------------------------------*/
                         //Attribute
-                        resultElement.setAttribute("emotions", resultObject.get("emotions").toString());
-                        resultElement.setAttribute("postedAt", resultObject.get("postedAt").toString());
-                        resultElement.setAttribute("id", resultObject.get("id").toString());
+                        storyElement.setAttribute("emotions", resultObject.get("emotions").toString());
+                        storyElement.setAttribute("postedAt", resultObject.get("postedAt").toString());
+                        storyElement.setAttribute("id", resultObject.get("id").toString());
                         //Text
                         Element contentElement = doc.createElement("content");
-                        resultElement.appendChild(contentElement);
+                        storyElement.appendChild(contentElement);
                         Text contentTextNode = doc.createTextNode(resultObject.get("content").toString());
                         contentElement.appendChild(contentTextNode);
                         //author-Attribute
                         Element authorElement = doc.createElement("author");
-                        resultElement.appendChild(authorElement);
+                        storyElement.appendChild(authorElement);
                         JSONObject authorObject = resultObject.getJSONObject("author");
                         authorElement.setAttribute("nickname", authorObject.get("nickname").toString());
                         authorElement.setAttribute("id", authorObject.get("id").toString());
