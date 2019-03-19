@@ -34,7 +34,7 @@ public class WelcomeController {
          * @param response
          * @throws Exception
          */
-        @RequestMapping("/")
+        @RequestMapping("/ss")
         @ResponseBody
         void get(HttpServletResponse response) throws Exception {
                 //获取文档对象
@@ -53,7 +53,7 @@ public class WelcomeController {
          * @param response
          * @throws Exception
          */
-        @RequestMapping("/story")
+        @RequestMapping("/")
         @ResponseBody
         void getStory(HttpServletResponse response) throws Exception {
                 //创建文档对象
@@ -63,9 +63,6 @@ public class WelcomeController {
 
                 //添加根节点
                 Element documentElement = doc.createElement("document");
-                
-                
-                
                 doc.appendChild(documentElement);
 
                 //获取请求体
@@ -84,60 +81,53 @@ public class WelcomeController {
                         //获取result值Object
                         JSONArray resultArray = new JSONObject(all).getJSONArray("result");
                         JSONObject resultObject = resultArray.getJSONObject(0);
+                        Element resultElement = doc.createElement("result");
+                        documentElement.appendChild(resultElement);
 
 
                         /*--------------------------添加节点comments----------------------------------*/
                         Element commentsElement = doc.createElement("comments");
-                        documentElement.appendChild(commentsElement);
+                        resultElement.appendChild(commentsElement);
                         JSONArray commentsArray = resultObject.getJSONArray("comments");
                         for (int i = 0; i < commentsArray.length(); i++) {
-                                JSONObject jsonObject = commentsArray.getJSONObject(i);
+                                JSONObject commentObject = commentsArray.getJSONObject(i);
+
+                                //创建节点comment
+                                Element commentElement = doc.createElement("comment");
+                                commentsElement.appendChild(commentElement);
+                                //Attribute
+                                commentElement.setAttribute("id", commentObject.get("id").toString());
+                                //Text
+                                Element commentContentElement = doc.createElement("content");
+                                commentElement.appendChild(commentContentElement);
+                                Text commentContentTextNode = doc.createTextNode(commentObject.get("content").toString());
+                                commentContentElement.appendChild(commentContentTextNode);
+                                //who-Attribute
+                                Element commentWhoElement = doc.createElement("who");
+                                commentElement.appendChild(commentWhoElement);
+                                JSONObject whoObject = commentObject.getJSONObject("who");
+                                commentWhoElement.setAttribute("nickname", whoObject.get("nickname").toString());
+                                commentWhoElement.setAttribute("id", whoObject.get("id").toString());
                         }
 
 
-                        /*--------------------------添加节点emotions----------------------------------*/
-                        //创建result的Text-emotions
-                        Element emotionsElement = doc.createElement("emotions");
-                        Text emotionsTextNode = doc.createTextNode(resultObject.get("emotions").toString());
-                        emotionsElement.appendChild(emotionsTextNode);
-                        documentElement.appendChild(emotionsElement);
-
-                        /*---------------------------添加节点postedAt---------------------------------*/
-                        //创建result的Text-postedAt
-                        Element postedAtElement = doc.createElement("postedAt");
-                        Text postedAtTextNode = doc.createTextNode(resultObject.get("postedAt").toString());
-                        postedAtElement.appendChild(postedAtTextNode);
-                        documentElement.appendChild(postedAtElement);
-
-                        /*-----------------------------添加节点author-------------------------------*/
-                        //创建result的Object-author
-                        Element authorElement = doc.createElement("author");
-                        documentElement.appendChild(authorElement);
-                        JSONObject authorObject = resultObject.getJSONObject("author");
-                        //创建author的Text-nickname
-                        Element authorNicknameElement = doc.createElement("nickname");
-                        Text authorNicknameTextNode = doc.createTextNode(authorObject.get("nickname").toString());
-                        authorNicknameElement.appendChild(authorNicknameTextNode);
-                        authorElement.appendChild(authorNicknameElement);
-                        //创建author的Text-id
-                        Element authorIdElement = doc.createElement("id");
-                        Text authorIdTextNode = doc.createTextNode(authorObject.get("id").toString());
-                        authorIdElement.appendChild(authorIdTextNode);
-                        authorElement.appendChild(authorIdElement);
-
-                        /*-----------------------------添加节点id-------------------------------*/
-                        //创建result的Text-id
-                        Element idElement = doc.createElement("id");
-                        Text idTextNode = doc.createTextNode(resultObject.get("id").toString());
-                        idElement.appendChild(idTextNode);
-                        documentElement.appendChild(idElement);
-
-                        /*------------------------------添加节点content------------------------------*/
-                        //创建result的Text-content
+                        /*--------------------------添加节点result----------------------------------*/
+                        //Attribute
+                        resultElement.setAttribute("emotions", resultObject.get("emotions").toString());
+                        resultElement.setAttribute("postedAt", resultObject.get("postedAt").toString());
+                        resultElement.setAttribute("id", resultObject.get("id").toString());
+                        //Text
                         Element contentElement = doc.createElement("content");
+                        resultElement.appendChild(contentElement);
                         Text contentTextNode = doc.createTextNode(resultObject.get("content").toString());
                         contentElement.appendChild(contentTextNode);
-                        documentElement.appendChild(contentElement);
+                        //author-Attribute
+                        Element authorElement = doc.createElement("author");
+                        resultElement.appendChild(authorElement);
+                        JSONObject authorObject = resultObject.getJSONObject("author");
+                        authorElement.setAttribute("nickname", authorObject.get("nickname").toString());
+                        authorElement.setAttribute("id", authorObject.get("id").toString());
+
                 }
 
                 //输出到页面
