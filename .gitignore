@@ -7,11 +7,11 @@
 *.iml
 *.ipr
 *.iws
-*.gitignore
 .idea
 
 ### NetBeans ###
 /.nb-gradle/
+/.gitignore/
 /build/
 /dist/
 /nb-configuration.xml
