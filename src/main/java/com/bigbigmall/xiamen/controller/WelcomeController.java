@@ -35,7 +35,7 @@ public class WelcomeController {
                                         }
                                 }
                         }
-                        System.out.println("max:"+max);
+                        System.out.println("max:" + max);
                         return max;
                 }
                 return "Incorrect parameters";
