@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<HTML>
+        <HEAD>
+                <META charset="UTF-8">
+                <META name="viewport" content="width=device-width, initial-scale=1.0">
+                <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                <TITLE>Prime Numbers 练习</TITLE>
+        </HEAD>
+        <BODY>
+                <FIELDSET>
+                        <LEGEND>列出两整数之间的所有素数</LEGEND>
+                        <iframe id="iframe_display" name="iframe_display" style="display: none;"></iframe> 
+                        <FORM action="saveTreeNode" target="iframe_display">
+                                <TABLE>
+                                        <TBODY>
+                                                <TR>
+                                                        <TH>
+                                                                <LABEL for="minimum">Minimum</LABEL>
+                                                        </TH>
+                                                        <TD>
+                                                                <INPUT id="minimum" name="minimum" required="" type="number">
+                                                        </TD>
+                                                        <TH>
+                                                                <LABEL for="maximum">Maximum</LABEL>
+                                                        </TH>
+                                                        <TD>
+                                                                <INPUT id="maximum" name="maximum" required="" type="number">
+                                                        </TD>
+                                                </TR>
+                                        </TBODY>
+                                </TABLE>
+                                <DIV style="padding:5px">
+                                        <INPUT type="submit" value="送出">
+                                        <INPUT type="reset" value="清空">
+                                </DIV>
+                                <TEXTAREA style="width:640px;height:480px" cols="1" readonly="" rows="1"></TEXTAREA>
+                        </FORM>        
+                                <SCRIPT>
+                                $("FORM").submit(function () {
+                                        var minimum = $("#minimum").val();
+                                        var maximum = $("#maximum").val();
+                                        $.post("primeNumbers", {"minimum": minimum, "maximum": maximum}, function (data) {
+                                                $("TEXTAREA").html(data);
+                                        });
+                                });
+
+</SCRIPT>
+			
+		</FIELDSET>
+	</BODY>
+</HTML>
