@@ -18,15 +18,24 @@ public class WelcomeController {
 
                         String max = "";
                         for (int i = minimum; i <= maximum; i++) {
-
+                                if (i == 1) {
+                                        continue;
+                                }
                                 if (i == 2 || i == 3 || i == 5 || i == 7) {
                                         max += i + "  ";
+                                        continue;
                                 }
 
-                                if (!(i % 2 == 0 || i % 3 == 0 || i % 5 == 0 || i % 7 == 0)) {
-                                        max += i + "  ";
+                                for (int j = 2; j < i; j++) {
+                                        if (i % j == 0) {
+                                                break;
+                                        }
+                                        if ((j + 1) == i) {
+                                                max += i + "  ";
+                                        }
                                 }
                         }
+                        System.out.println("max:"+max);
                         return max;
                 }
                 return "Incorrect parameters";
