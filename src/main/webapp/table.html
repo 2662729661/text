@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+        <head>
+                <title>TODO supply a title</title>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                <script>
+                        window.onload = function () {
+                                $.post("multiplication2", {}, function (data) {
+                                        var js = JSON.parse(data);
+
+                                        //大Array
+                                        for (var i = 0; i < js.length; i++) {
+                                                var array = js[i];
+                                                var tr = document.createElement("tr");
+                                                $("tbody").append(tr);
+                                                //小Array
+                                                for (var j = 0; j < array.length; j++) {
+
+                                                        //追加
+                                                        if (i == 0) {
+                                                                var th = document.createElement("th");
+                                                                if (j != 0) {
+                                                                        $(th).html(array[j][i + ""]);
+                                                                }
+                                                                tr.appendChild(th);
+
+                                                        } else {
+                                                                var td = document.createElement("td");
+                                                                $(td).html(array[j][i + ""]);
+                                                                tr.appendChild(td);
+                                                                $("tbody").append(tr);
+                                                        }
+                                                }
+                                        }
+                                });
+                        }
+
+                </script>
+        </head>
+        <body>
+                <table border="11">
+                        <thead>
+
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                </table>
+        </body>
+</html>

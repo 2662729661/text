@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/")
 public class WelcomeController {
 
+        /**
+         * 求两数区间的素数
+         *
+         * @param minimum
+         * @param maximum
+         * @return
+         */
         @RequestMapping("/primeNumbers")
         @ResponseBody
         public String getPrimeNumbers(int minimum, int maximum) {
@@ -41,6 +48,11 @@ public class WelcomeController {
                 return "Incorrect parameters";
         }
 
+        /**
+         * 九九乘法表
+         *
+         * @return
+         */
         @RequestMapping("/multiplication")
         @ResponseBody
         public String getMultiplicationTable() {
@@ -58,6 +70,48 @@ public class WelcomeController {
 
                         }
                 }
+                mt += "]";
+                return mt;
+        }
+
+        /**
+         * 九九乘法表2
+         *
+         * @return
+         */
+        @RequestMapping("/multiplication2")
+        @ResponseBody
+        public String getTable() {
+                String mt = "[";
+
+                for (int i = 0; i <= 10; i++) {
+                        mt += "[";
+                        mt += "{" + '"' + i + '"' + ":" + '"' + i + '"' + "},";
+                        if (i == 0) {
+                                for (int j = 1; j <= 10; j++) {
+                                        if (j == 10) {
+                                                mt += "{" + '"' + i + '"' + ":" + '"' + j + '"' + "}";
+                                        } else {
+                                                mt += "{" + '"' + i + '"' + ":" + '"' + j + '"' + "},";
+                                        }
+                                }
+                        } else {
+                                for (int j = 1; j <= 10; j++) {
+                                        if (j == 10) {
+                                                mt += "{" + '"' + i + '"' + ":" + '"' + (i * j) + '"' + "}";
+                                        } else {
+                                                mt += "{" + '"' + i + '"' + ":" + '"' + (i * j) + '"' + "},";
+                                        }
+                                }
+                        }
+                        if (i == 10) {
+                                mt += "]";
+                        } else {
+                                mt += "],";
+                        }
+
+                }
+
                 mt += "]";
                 return mt;
         }
