@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                <script>
+                        window.onload = function () {
+                                $.post("multiplicationTable", {}, function (data) {
+
+                                        var js = JSON.parse(data);
+
+                                        //添加2-5
+                                        for (var i = 0; i < 9; i++) {
+                                                var tr1 = document.createElement("tr");
+                                                $("#body").append(tr1);
+
+                                                var tr1td = document.createElement("td");
+                                                $(tr1td).html(js[i]["2"]);
+                                                tr1.appendChild(tr1td);
+                                                var tr1td2 = document.createElement("td");
+                                                $(tr1td2).html(js[i + 9]["3"]);
+                                                tr1.appendChild(tr1td2);
+                                                var tr1td3 = document.createElement("td");
+                                                $(tr1td3).html(js[i + 18]["4"]);
+                                                tr1.appendChild(tr1td3);
+                                                var tr1td4 = document.createElement("td");
+                                                $(tr1td4).html(js[i + 27]["5"]);
+                                                tr1.appendChild(tr1td4);
+                                        }
+
+                                        //添加6-9
+                                        for (var i = 0; i < 9; i++) {
+                                                var tr2 = document.createElement("tr");
+                                                $("#body").append(tr2);
+
+                                                var tr2td = document.createElement("td");
+                                                $(tr2td).html(js[i + 36]["6"]);
+                                                tr2.appendChild(tr2td);
+                                                var tr2td2 = document.createElement("td");
+                                                $(tr2td2).html(js[i + 45]["7"]);
+                                                tr2.appendChild(tr2td2);
+                                                var tr2td3 = document.createElement("td");
+                                                $(tr2td3).html(js[i + 54]["8"]);
+                                                tr2.appendChild(tr2td3);
+                                                var tr2td4 = document.createElement("td");
+                                                $(tr2td4).html(js[i + 63]["9"]);
+                                                tr2.appendChild(tr2td4);
+                                        }
+
+
+                                });
+                        }
+                </script>
+        </head>
+        <body>
+                <table border="1">
+                        <tbody id="body">
+
+                        </tbody>
+                </table>
+                <div></div>
+
+        </body>
+</html>

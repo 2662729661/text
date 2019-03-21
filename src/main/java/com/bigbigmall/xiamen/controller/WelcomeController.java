@@ -14,14 +14,14 @@ public class WelcomeController {
         @RequestMapping("/primeNumbers")
         @ResponseBody
         public String getPrimeNumbers(int minimum, int maximum) {
-                if (minimum > 0 && (maximum > 0 && maximum > minimum)) {
+                if (minimum > 0 && maximum > 0 && maximum > minimum) {
 
                         String max = "";
                         for (int i = minimum; i <= maximum; i++) {
                                 if (i == 1) {
                                         continue;
                                 }
-                                if (i == 2 || i == 3 || i == 5 || i == 7) {
+                                if (i == 2) {
                                         max += i + "  ";
                                         continue;
                                 }
@@ -41,4 +41,22 @@ public class WelcomeController {
                 return "Incorrect parameters";
         }
 
+        @RequestMapping("/multiplicationTable")
+        @ResponseBody
+        public String getMultiplicationTable() {
+
+                String mt = "[";
+                for (int i = 2; i <= 9; i++) {
+                        for (int j = 1; j <= 9; j++) {
+                                if (j == 9 && i == 9) {
+                                        mt += "{" + '"' + i + '"' + ":" + '"' + (i + "&#215;" + j + "=" + (i * j)) + '"' + "}";
+                                } else {
+                                        mt += "{" + '"' + i + '"' + ":" + '"' + (i + "&#215;" + j + "=" + (i * j)) + '"' + "},";
+                                }
+
+                        }
+                }
+                mt += "]";
+                return mt;
+        }
 }
