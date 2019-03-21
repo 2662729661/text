@@ -115,4 +115,60 @@ public class WelcomeController {
                 mt += "]";
                 return mt;
         }
+
+        /**
+         * 九九乘法表3
+         *
+         * @return
+         */
+        @RequestMapping("/multiplication3")
+        @ResponseBody
+        public String getMultiplication() {
+                String mt = "[";
+                for (int i = 9; i > 0; i--) {
+                        mt += "[";
+                        for (int j = 1; j <= i; j++) {
+                                if (j == i) {
+                                        mt += "{" + '"' + i + '"' + ":" + '"' + i + "&#215;" + j + "=" + (i * j) + '"' + "}";
+                                } else {
+                                        mt += "{" + '"' + i + '"' + ":" + '"' + i + "&#215;" + j + "=" + (i * j) + '"' + "},";
+                                }
+                        }
+                        if (i == 1) {
+                                mt += "]";
+                        } else {
+                                mt += "],";
+                        }
+                }
+                mt += "]";
+                return mt;
+        }
+
+        /**
+         * 九九乘法表4
+         *
+         * @return
+         */
+        @RequestMapping("/multiplication4")
+        @ResponseBody
+        public String getMultiplication4() {
+                String mt = "[";
+                for (int i = 1; i < 10; i++) {
+                        mt += "[";
+                        for (int j = 1; j < 10; j++) {
+                                if (j == 9) {
+                                        mt += "{" + '"' + i + '"' + ":" + '"' + i + "&#215;" + j + "=" + (i * j) + '"' + "}";
+                                } else {
+                                        mt += "{" + '"' + i + '"' + ":" + '"' + i + "&#215;" + j + "=" + (i * j) + '"' + "},";
+                                }
+                        }
+                        if (i == 9) {
+                                mt += "]";
+                        } else {
+                                mt += "],";
+                        }
+                }
+                mt += "]";
+                return mt;
+        }
 }
