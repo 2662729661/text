@@ -41,7 +41,7 @@ public class WelcomeController {
                 return "Incorrect parameters";
         }
 
-        @RequestMapping("/multiplicationTable")
+        @RequestMapping("/multiplication")
         @ResponseBody
         public String getMultiplicationTable() {
 
