@@ -60,6 +60,7 @@ public class WelcomeController {
                 String mt = "[";
                 for (int i = 2; i <= 9; i++) {
                         for (int j = 1; j <= 9; j++) {
+
                                 if (j == 9 && i == 9) {
                                         mt += "{" + '"' + i + '"' + ":" + '"' + (i + "&#215;" + j + "=" + (i * j)) + '"' + "}";
                                 } else if ((i == 2 || i == 3 || i == 5 || i == 7) && j == 1) {

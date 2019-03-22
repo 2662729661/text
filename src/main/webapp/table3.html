@@ -10,6 +10,14 @@ and open the template in the editor.
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+        </head>
+        <body>
+                <table border="111">
+                        <tbody>
+
+                        </tbody>
+                </table>
                 <script>
                         window.onload = function () {
                                 $.post("multiplication4", {}, function (data) {
@@ -19,24 +27,17 @@ and open the template in the editor.
                                                 var array = js[i];
                                                 var tr = document.createElement("tr");
                                                 var tdh = document.createElement("td");
-                                                $(tdh).html(i+1);
+                                                $(tdh).html(i + 1);
                                                 tr.appendChild(tdh);
                                                 $("tbody").append(tr);
                                                 for (var j = 0; j < array.length; j++) {
                                                         var td = document.createElement("td");
-                                                        $(td).html(array[j][(i+1)+""]);
+                                                        $(td).html(array[j][(i + 1) + ""]);
                                                         tr.appendChild(td);
                                                 }
                                         }
                                 });
                         };
                 </script>
-        </head>
-        <body>
-                <table border="11">
-                        <tbody>
-
-                        </tbody>
-                </table>
         </body>
 </html>
