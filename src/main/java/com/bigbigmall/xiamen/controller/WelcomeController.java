@@ -158,9 +158,9 @@ public class WelcomeController {
                         mt += "[";
                         for (int j = 1; j < 10; j++) {
                                 if (j == 9) {
-                                        mt += "{" + '"' + i + '"' + ":" + '"' + i + "&#215;" + j + "=" + (i * j) + '"' + "}";
+                                        mt += "{" + '"' + "name" + '"' + ":" + '"' + i + "*" + j + "=" + (i * j) + '"' + "}";
                                 } else {
-                                        mt += "{" + '"' + i + '"' + ":" + '"' + i + "&#215;" + j + "=" + (i * j) + '"' + "},";
+                                        mt += "{" + '"' + "name" + '"' + ":" + '"' + i + "*" + j + "=" + (i * j) + '"' + "},";
                                 }
                         }
                         if (i == 9) {
@@ -169,6 +169,8 @@ public class WelcomeController {
                                 mt += "],";
                         }
                 }
+
+                System.out.println(mt);
                 mt += "]";
                 return mt;
         }

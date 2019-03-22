@@ -1,43 +1,27 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
         <head>
                 <title>TODO supply a title</title>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+                <script type="text/javascript" src="js/angular.min.js"></script>
+                <script type="text/javascript" src="js/base.js"></script>
+                <script type="text/javascript" src="js/service/tableService.js"></script>
+                <script type="text/javascript" src="js/controller/tableController.js"></script>
 
         </head>
-        <body>
+        <body ng-app="xiamen" ng-controller="tableController" ng-init="multiplication4()">
                 <table border="111">
                         <tbody>
-
+                                <tr ng-repeat="li in js">
+                                        <td>{{mu()}}</td>
+                                        <td ng-repeat="i in li">
+                                                {{i["name"]}}
+                                        </td>
+                                </tr>
                         </tbody>
                 </table>
-                <script>
-                        window.onload = function () {
-                                $.post("multiplication4", {}, function (data) {
-                                        var js = JSON.parse(data);
-
-                                        for (var i = 0; i < js.length; i++) {
-                                                var array = js[i];
-                                                var tr = document.createElement("tr");
-                                                var tdh = document.createElement("td");
-                                                $(tdh).html(i + 1);
-                                                tr.appendChild(tdh);
-                                                $("tbody").append(tr);
-                                                for (var j = 0; j < array.length; j++) {
-                                                        var td = document.createElement("td");
-                                                        $(td).html(array[j][(i + 1) + ""]);
-                                                        tr.appendChild(td);
-                                                }
-                                        }
-                                });
-                        };
-                </script>
         </body>
 </html>
