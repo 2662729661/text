@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 
 /**
@@ -140,7 +139,7 @@ public class WelcomeController {
         }
 
         /**
-         * 求两数区间的素数
+         * 求两数区间的素数-前端页面调用
          *
          * @param minimum
          * @param maximum
@@ -177,7 +176,7 @@ public class WelcomeController {
         }
 
         /**
-         * 九九乘法表
+         * 九九乘法表-前端页面调用
          *
          * @return
          */
@@ -202,7 +201,7 @@ public class WelcomeController {
         }
 
         /**
-         * 九九乘法表2
+         * 九九乘法表2-前端页面调用
          *
          * @return
          */
@@ -291,7 +290,7 @@ public class WelcomeController {
         }
 
         /**
-         * 九九乘法表3
+         * 九九乘法表3-前端页面调用
          *
          * @return
          */
@@ -306,6 +305,38 @@ public class WelcomeController {
                                         mt += "{" + '"' + i + '"' + ":" + '"' + i + "&#215;" + j + "=" + (i * j) + '"' + "}";
                                 } else {
                                         mt += "{" + '"' + i + '"' + ":" + '"' + i + "&#215;" + j + "=" + (i * j) + '"' + "},";
+                                }
+                        }
+                        if (i == 1) {
+                                mt += "]";
+                        } else {
+                                mt += "],";
+                        }
+                }
+                mt += "]";
+                return mt;
+        }
+
+        /**
+         * 九九乘法表3-xml-controller调用
+         *
+         * @return
+         */
+        @RequestMapping("/multiplication3XML")
+        @ResponseBody
+        public String getMultiplicationXML() {
+                String mt = "[";
+                for (int i = 9; i > 0; i--) {
+                        mt += "[";
+                        for (int j = 1; j <= i; j++) {
+                                if (j == i) {
+                                        mt += "{" + '"' + "mt1" + '"' + ":" + '"' + i + " " + '"' + ","
+                                                + '"' + "mt2" + '"' + ":" + '"' + j + " = " + '"' + ","
+                                                + '"' + "mt3" + '"' + ":" + '"' + (i * j) + '"' + "}";
+                                } else {
+                                        mt += "{" + '"' + "mt1" + '"' + ":" + '"' + i + " " + '"' + ","
+                                                + '"' + "mt2" + '"' + ":" + '"' + j + " = " + '"' + ","
+                                                + '"' + "mt3" + '"' + ":" + '"' + (i * j) + '"' + "},";
                                 }
                         }
                         if (i == 1) {
@@ -336,7 +367,7 @@ public class WelcomeController {
                 doc.appendChild(documentElement);
 
                 //获取Array
-                String multiplication = getMultiplication();
+                String multiplication = getMultiplicationXML();
                 JSONArray multiplicationArray = new JSONArray(multiplication);
                 int s = 1;
                 //循环
@@ -347,18 +378,25 @@ public class WelcomeController {
 
                         for (int j = 0; j < 9; j++) {
                                 Element mtElement = doc.createElement("mt" + j);
+                                Element mt2Element = doc.createElement("mt1" + j);
+                                Element mt3Element = doc.createElement("mt2" + j);
                                 mtsElement.appendChild(mtElement);
+                                mtsElement.appendChild(mt2Element);
+                                mtsElement.appendChild(mt3Element);
                                 if (s > j) {
                                         JSONObject mtObject = mtsArray.getJSONObject(j);
-                                        String next = mtObject.keys().next();
-                                        Text createTextNode = doc.createTextNode(mtObject.get(next).toString());
-                                        mtElement.appendChild(createTextNode);
+                                        Text mt1TextNode = doc.createTextNode(mtObject.get("mt1").toString());
+                                        Text mt2TextNode = doc.createTextNode(mtObject.get("mt2").toString());
+                                        Text mt3TextNode = doc.createTextNode(mtObject.get("mt3").toString());
+                                        mtElement.appendChild(mt1TextNode);
+                                        mt2Element.appendChild(mt2TextNode);
+                                        mt3Element.appendChild(mt3TextNode);
                                 }
                         }
                         s++;
                 }
                 Source source = new DOMSource(doc);
-
+//
                 // 将XML源文件添加到模型中，以便XsltView能够检测
                 ModelAndView model = new ModelAndView("multiplication3");
                 model.addObject("xmlSource", source);
