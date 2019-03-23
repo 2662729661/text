@@ -1,10 +1,17 @@
 package com.bigbigmall.xiamen.controller;
 
+import java.io.File;
+import java.util.Iterator;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -13,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 
 /**
@@ -236,6 +244,53 @@ public class WelcomeController {
         }
 
         /**
+         * 九九乘法表2-xml
+         *
+         * @return
+         */
+        @RequestMapping("/multiplicationXML2")
+        @ResponseBody
+        public ModelAndView getTableXML(HttpServletResponse response) throws Exception {
+                //创建文档对象
+                DocumentBuilderFactory newInstance = DocumentBuilderFactory.newInstance();
+                DocumentBuilder newDocumentBuilder = newInstance.newDocumentBuilder();
+                Document doc = newDocumentBuilder.newDocument();
+
+                //创建根节点
+                Element documentElement = doc.createElement("document");
+                doc.appendChild(documentElement);
+
+                //获取数据
+                String table = getTable();
+                JSONArray arrays = new JSONArray(table);
+
+                //循环
+                for (int i = 0; i < arrays.length(); i++) {
+                        Element mtsElement = doc.createElement("mts");
+                        documentElement.appendChild(mtsElement);
+                        JSONArray array = arrays.getJSONArray(i);
+
+                        for (int j = 0; j < array.length(); j++) {
+                                Element mtElement = doc.createElement("mt" + j);
+                                mtsElement.appendChild(mtElement);
+                                JSONObject object = array.getJSONObject(j);
+                                Text mtTextNode = doc.createTextNode(object.get(i + "").toString());
+                                mtElement.appendChild(mtTextNode);
+                        }
+
+                }
+
+                Source source = new DOMSource(doc);
+
+                // 将XML源文件添加到模型中，以便XsltView能够检测
+                ModelAndView model = new ModelAndView("multiplication2");
+                model.addObject("xmlSource", source);
+
+                return model;
+                //TransformerFactory.newInstance().newTransformer().transform(new DOMSource(doc), new StreamResult(response.getOutputStream()));
+        }
+
+        /**
          * 九九乘法表3
          *
          * @return
@@ -261,6 +316,55 @@ public class WelcomeController {
                 }
                 mt += "]";
                 return mt;
+        }
+
+        /**
+         * 九九乘法表3-XML
+         *
+         * @return
+         */
+        @RequestMapping("/multiplicationXML3")
+        @ResponseBody
+        public ModelAndView getMultiplicationXML(HttpServletResponse response) throws Exception {
+                //获取文档对象
+                DocumentBuilderFactory newInstance = DocumentBuilderFactory.newInstance();
+                DocumentBuilder newDocumentBuilder = newInstance.newDocumentBuilder();
+                Document doc = newDocumentBuilder.newDocument();
+
+                //创建根节点
+                Element documentElement = doc.createElement("document");
+                doc.appendChild(documentElement);
+
+                //获取Array
+                String multiplication = getMultiplication();
+                JSONArray multiplicationArray = new JSONArray(multiplication);
+                int s = 1;
+                //循环
+                for (int i = multiplicationArray.length() - 1; i >= 0; i--) {
+                        Element mtsElement = doc.createElement("mts");
+                        documentElement.appendChild(mtsElement);
+                        JSONArray mtsArray = multiplicationArray.getJSONArray(i);
+
+                        for (int j = 0; j < 9; j++) {
+                                Element mtElement = doc.createElement("mt" + j);
+                                mtsElement.appendChild(mtElement);
+                                if (s > j) {
+                                        JSONObject mtObject = mtsArray.getJSONObject(j);
+                                        String next = mtObject.keys().next();
+                                        Text createTextNode = doc.createTextNode(mtObject.get(next).toString());
+                                        mtElement.appendChild(createTextNode);
+                                }
+                        }
+                        s++;
+                }
+                Source source = new DOMSource(doc);
+
+                // 将XML源文件添加到模型中，以便XsltView能够检测
+                ModelAndView model = new ModelAndView("multiplication3");
+                model.addObject("xmlSource", source);
+
+                return model;
+                //TransformerFactory.newInstance().newTransformer().transform(new DOMSource(doc), new StreamResult(response.getOutputStream()));
         }
 
         /**
