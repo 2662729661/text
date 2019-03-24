@@ -36,47 +36,33 @@ public class WelcomeController {
          */
         @RequestMapping("/multiplicationXml")
         @ResponseBody
-        public String getMultiplicationTableXML() {
+        public JSONArray getMultiplicationTableXML() {
 
-                String mt = "[";
-
+                JSONArray array = new JSONArray();
                 for (int i = 1; i <= 9; i++) {
-                        mt += "[";
+                        JSONArray array2 = new JSONArray();
+                        array.put(array2);
                         for (int j = 2; j <= 5; j++) {
-                                if (j == 5) {
-                                        mt += "{" + '"' + "mt1" + '"' + ":" + '"' + " " + j + " " + '"' + ","
-                                                + '"' + "mt2" + '"' + ":" + '"' + i + " = " + '"' + ","
-                                                + '"' + "mt3" + '"' + ":" + '"' + (i * j) + '"' + "}";
-                                } else {
-                                        mt += "{" + '"' + "mt1" + '"' + ":" + '"' + " " + j + " " + '"' + ","
-                                                + '"' + "mt2" + '"' + ":" + '"' + i + " = " + '"' + ","
-                                                + '"' + "mt3" + '"' + ":" + '"' + (i * j) + '"' + "},";
-                                }
+                                JSONObject object = new JSONObject();
+                                object.put("mt1", " " + j + " ");
+                                object.put("mt2", i + " = ");
+                                object.put("mt3", (i * j));
+                                array2.put(object);
                         }
-                        mt += "],";
                 }
 
                 for (int i = 1; i <= 9; i++) {
-                        mt += "[";
+                        JSONArray array2 = new JSONArray();
+                        array.put(array2);
                         for (int j = 6; j <= 9; j++) {
-                                if (j == 9) {
-                                        mt += "{" + '"' + "mt1" + '"' + ":" + '"' + " " + j + " " + '"' + ","
-                                                + '"' + "mt2" + '"' + ":" + '"' + i + " = " + '"' + ","
-                                                + '"' + "mt3" + '"' + ":" + '"' + (i * j) + '"' + "}";
-                                } else {
-                                        mt += "{" + '"' + "mt1" + '"' + ":" + '"' + " " + j + " " + '"' + ","
-                                                + '"' + "mt2" + '"' + ":" + '"' + i + " = " + '"' + ","
-                                                + '"' + "mt3" + '"' + ":" + '"' + (i * j) + '"' + "},";
-                                }
-                        }
-                        if (i == 9) {
-                                mt += "]";
-                        } else {
-                                mt += "],";
+                                JSONObject object = new JSONObject();
+                                object.put("mt1", " " + j + " ");
+                                object.put("mt2", i + " = ");
+                                object.put("mt3", (i * j));
+                                array2.put(object);
                         }
                 }
-                mt += "]";
-                return mt;
+                return array;
         }
 
         /**
@@ -97,8 +83,7 @@ public class WelcomeController {
                 doc.appendChild(documentElement);
 
                 //获取数据
-                String string = getMultiplicationTableXML();
-                JSONArray mtArray = new JSONArray(string);
+                JSONArray mtArray = getMultiplicationTableXML();
 
                 //循环添加
                 for (int i = 0; i < mtArray.length(); i++) {
@@ -184,20 +169,20 @@ public class WelcomeController {
         @ResponseBody
         public String getMultiplicationTable() {
 
-                String mt = "[";
+                JSONArray array = new JSONArray();
                 for (int i = 2; i <= 9; i++) {
                         for (int j = 1; j <= 9; j++) {
-                                if (j == 9 && i == 9) {
-                                        mt += "{" + '"' + i + '"' + ":" + '"' + (i + "&#215;" + j + "=" + (i * j)) + '"' + "}";
-                                } else if ((i == 2 || i == 3 || i == 5 || i == 7) && j == 1) {
-                                        mt += "{" + '"' + i + '"' + ":" + '"' + (i + "&#215;" + j + "=" + "<font color='red'>" + (i * j)) + "</font>" + '"' + "},";
+                                JSONObject object = new JSONObject();
+                                if ((i == 2 || i == 3 || i == 5 || i == 7) && j == 1) {
+                                        object.put(i + "", (i + "&#215;" + j + "=" + "<font color='red'>" + (i * j) + "</font>"));
                                 } else {
-                                        mt += "{" + '"' + i + '"' + ":" + '"' + (i + "&#215;" + j + "=" + (i * j)) + '"' + "},";
+                                        object.put(i + "", (i + "&#215;" + j + "=" + (i * j)));
                                 }
+                                array.put(object);
                         }
                 }
-                mt += "]";
-                return mt;
+                String toString = array.toString();
+                return toString;
         }
 
         /**
@@ -208,38 +193,31 @@ public class WelcomeController {
         @RequestMapping("/multiplication2")
         @ResponseBody
         public String getTable() {
-                String mt = "[";
-
+                JSONArray array = new JSONArray();
                 for (int i = 0; i <= 10; i++) {
-                        mt += "[";
-                        mt += "{" + '"' + i + '"' + ":" + '"' + i + '"' + "},";
+                        JSONArray array1 = new JSONArray();
+                        array.put(array1);
+
+                        JSONObject object = new JSONObject();
+                        object.put(i + "", i + "");
+                        array1.put(object);
+
                         if (i == 0) {
                                 for (int j = 1; j <= 10; j++) {
-                                        if (j == 10) {
-                                                mt += "{" + '"' + i + '"' + ":" + '"' + j + '"' + "}";
-                                        } else {
-                                                mt += "{" + '"' + i + '"' + ":" + '"' + j + '"' + "},";
-                                        }
+                                        JSONObject object1 = new JSONObject();
+                                        object1.put(i + "", j + "");
+                                        array1.put(object1);
                                 }
                         } else {
                                 for (int j = 1; j <= 10; j++) {
-                                        if (j == 10) {
-                                                mt += "{" + '"' + i + '"' + ":" + '"' + (i * j) + '"' + "}";
-                                        } else {
-                                                mt += "{" + '"' + i + '"' + ":" + '"' + (i * j) + '"' + "},";
-                                        }
+                                        JSONObject object1 = new JSONObject();
+                                        object1.put(i + "", (i * j) + "");
+                                        array1.put(object1);
                                 }
                         }
-                        if (i == 10) {
-                                mt += "]";
-                        } else {
-                                mt += "],";
-                        }
-
                 }
-
-                mt += "]";
-                return mt;
+                String string = array.toString();
+                return string;
         }
 
         /**
@@ -297,24 +275,19 @@ public class WelcomeController {
         @RequestMapping("/multiplication3")
         @ResponseBody
         public String getMultiplication() {
-                String mt = "[";
-                for (int i = 9; i > 0; i--) {
-                        mt += "[";
+
+                JSONArray array = new JSONArray();
+                for (int i = 99; i > 0; i--) {
+                        JSONArray array1 = new JSONArray();
+                        array.put(array1);
                         for (int j = 1; j <= i; j++) {
-                                if (j == i) {
-                                        mt += "{" + '"' + i + '"' + ":" + '"' + i + "&#215;" + j + "=" + (i * j) + '"' + "}";
-                                } else {
-                                        mt += "{" + '"' + i + '"' + ":" + '"' + i + "&#215;" + j + "=" + (i * j) + '"' + "},";
-                                }
-                        }
-                        if (i == 1) {
-                                mt += "]";
-                        } else {
-                                mt += "],";
+                                JSONObject object = new JSONObject();
+                                object.put(i + "", i + "&#215;" + j + "=" + (i * j));
+                                array1.put(object);
                         }
                 }
-                mt += "]";
-                return mt;
+                String string = array.toString();
+                return string;
         }
 
         /**
@@ -324,29 +297,20 @@ public class WelcomeController {
          */
         @RequestMapping("/multiplication3XML")
         @ResponseBody
-        public String getMultiplicationXML() {
-                String mt = "[";
+        public JSONArray getMultiplicationXML() {
+                JSONArray array = new JSONArray();
                 for (int i = 9; i > 0; i--) {
-                        mt += "[";
+                        JSONArray array1 = new JSONArray();
+                        array.put(array1);
                         for (int j = 1; j <= i; j++) {
-                                if (j == i) {
-                                        mt += "{" + '"' + "mt1" + '"' + ":" + '"' + i + " " + '"' + ","
-                                                + '"' + "mt2" + '"' + ":" + '"' + j + " = " + '"' + ","
-                                                + '"' + "mt3" + '"' + ":" + '"' + (i * j) + '"' + "}";
-                                } else {
-                                        mt += "{" + '"' + "mt1" + '"' + ":" + '"' + i + " " + '"' + ","
-                                                + '"' + "mt2" + '"' + ":" + '"' + j + " = " + '"' + ","
-                                                + '"' + "mt3" + '"' + ":" + '"' + (i * j) + '"' + "},";
-                                }
-                        }
-                        if (i == 1) {
-                                mt += "]";
-                        } else {
-                                mt += "],";
+                                JSONObject object = new JSONObject();
+                                object.put("mt1", i + " ");
+                                object.put("mt2", j + " = ");
+                                object.put("mt3", (i * j));
+                                array1.put(object);
                         }
                 }
-                mt += "]";
-                return mt;
+                return array;
         }
 
         /**
@@ -367,8 +331,7 @@ public class WelcomeController {
                 doc.appendChild(documentElement);
 
                 //获取Array
-                String multiplication = getMultiplicationXML();
-                JSONArray multiplicationArray = new JSONArray(multiplication);
+                JSONArray multiplicationArray = getMultiplicationXML();
                 int s = 1;
                 //循环
                 for (int i = multiplicationArray.length() - 1; i >= 0; i--) {
@@ -413,24 +376,18 @@ public class WelcomeController {
         @RequestMapping("/multiplication4")
         @ResponseBody
         public String getMultiplication4() {
-                String mt = "[";
+                JSONArray array = new JSONArray();
                 for (int i = 1; i < 10; i++) {
-                        mt += "[";
+                        JSONArray array1 = new JSONArray();
+                        array.put(array1);
                         for (int j = 1; j < 10; j++) {
-                                if (j == 9) {
-                                        mt += "{" + '"' + "name" + '"' + ":" + '"' + i + "*" + j + "=" + (i * j) + '"' + "}";
-                                } else {
-                                        mt += "{" + '"' + "name" + '"' + ":" + '"' + i + "*" + j + "=" + (i * j) + '"' + "},";
-                                }
-                        }
-                        if (i == 9) {
-                                mt += "]";
-                        } else {
-                                mt += "],";
+                                JSONObject object = new JSONObject();
+                                object.put("name", i + "*" + j + "=" + (i * j));
+                                array1.put(object);
                         }
                 }
 
-                mt += "]";
-                return mt;
+                String string = array.toString();
+                return string;
         }
 }
