@@ -17,44 +17,60 @@
                                                                         <xsl:value-of select="mt20"/>
                                                                 </td>
                                                                 <td>
-                                                                        <xsl:value-of select="mt1"/>&#215;
-                                                                        <xsl:value-of select="mt11"/>
-                                                                        <xsl:value-of select="mt21"/>
+                                                                        <xsl:if test="mt1 != ''">
+                                                                                <xsl:value-of select="mt1"/>&#215;
+                                                                                <xsl:value-of select="mt11"/>
+                                                                                <xsl:value-of select="mt21"/>
+                                                                        </xsl:if>
                                                                 </td>
                                                                 <td>
-                                                                        <xsl:value-of select="mt2"/>&#215;
-                                                                        <xsl:value-of select="mt12"/>
-                                                                        <xsl:value-of select="mt22"/>
+                                                                        <xsl:if test="mt2 != ''">
+                                                                                <xsl:value-of select="mt2"/>&#215;
+                                                                                <xsl:value-of select="mt12"/>
+                                                                                <xsl:value-of select="mt22"/>
+                                                                        </xsl:if>
                                                                 </td>
                                                                 <td>
-                                                                        <xsl:value-of select="mt3"/>&#215;
-                                                                        <xsl:value-of select="mt13"/>
-                                                                        <xsl:value-of select="mt23"/>
+                                                                        <xsl:if test="mt3 != ''">
+                                                                                <xsl:value-of select="mt3"/>&#215;
+                                                                                <xsl:value-of select="mt13"/>
+                                                                                <xsl:value-of select="mt23"/>
+                                                                        </xsl:if>
                                                                 </td>
                                                                 <td>
-                                                                        <xsl:value-of select="mt4"/>&#215;
-                                                                        <xsl:value-of select="mt14"/>
-                                                                        <xsl:value-of select="mt24"/>
+                                                                        <xsl:if test="mt4 != ''">
+                                                                                <xsl:value-of select="mt4"/>&#215;
+                                                                                <xsl:value-of select="mt14"/>
+                                                                                <xsl:value-of select="mt24"/>
+                                                                        </xsl:if>
                                                                 </td>
                                                                 <td>
-                                                                        <xsl:value-of select="mt5"/>&#215;
-                                                                        <xsl:value-of select="mt15"/>
-                                                                        <xsl:value-of select="mt25"/>
+                                                                        <xsl:if test="mt5 != ''">
+                                                                                <xsl:value-of select="mt5"/>&#215;
+                                                                                <xsl:value-of select="mt15"/>
+                                                                                <xsl:value-of select="mt25"/>
+                                                                        </xsl:if>
                                                                 </td>
                                                                 <td>
-                                                                        <xsl:value-of select="mt6"/>&#215;
-                                                                        <xsl:value-of select="mt16"/>
-                                                                        <xsl:value-of select="mt26"/>
+                                                                        <xsl:if test="mt6 != ''">
+                                                                                <xsl:value-of select="mt6"/>&#215;
+                                                                                <xsl:value-of select="mt16"/>
+                                                                                <xsl:value-of select="mt26"/>
+                                                                        </xsl:if>
                                                                 </td>
                                                                 <td>
-                                                                        <xsl:value-of select="mt7"/>&#215;
-                                                                        <xsl:value-of select="mt17"/>
-                                                                        <xsl:value-of select="mt27"/>
+                                                                        <xsl:if test="mt7 != ''">
+                                                                                <xsl:value-of select="mt7"/>&#215;
+                                                                                <xsl:value-of select="mt17"/>
+                                                                                <xsl:value-of select="mt27"/>
+                                                                        </xsl:if>
                                                                 </td>
                                                                 <td>
-                                                                        <xsl:value-of select="mt8"/>&#215;
-                                                                        <xsl:value-of select="mt18"/>
-                                                                        <xsl:value-of select="mt28"/>
+                                                                        <xsl:if test="mt8 != ''">
+                                                                                <xsl:value-of select="mt8"/>&#215;
+                                                                                <xsl:value-of select="mt18"/>
+                                                                                <xsl:value-of select="mt28"/>
+                                                                        </xsl:if>
                                                                 </td>
                                                         </tr>
                                                 </xsl:for-each>
